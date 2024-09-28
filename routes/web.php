@@ -14,5 +14,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
+
+Route::get('/cliente', [ClienteController::class, 'index'])->name('cliente.index');
+Route::get('/cliente/get', [ClienteController::class, 'getAll'])->name('cliente.tabela');
+Route::get('/cliente/add', [ClienteController::class, 'formCliente'])->name('cliente.form');
