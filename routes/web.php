@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ClienteController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,5 +19,8 @@ Route::get('/', function () {
 });
 
 Route::get('/cliente', [ClienteController::class, 'index'])->name('cliente.index');
+
 Route::get('/cliente/get', [ClienteController::class, 'getAll'])->name('cliente.tabela');
+
 Route::get('/cliente/add', [ClienteController::class, 'formCliente'])->name('cliente.form');
+

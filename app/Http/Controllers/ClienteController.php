@@ -20,4 +20,16 @@ class ClienteController extends Controller
 
         return view('cliente.tabela', compact('clientes'));
     }
+
+    public function delete($id) {
+        $cliente = Cliente::find($id);
+
+        if (!$cliente) {
+            return redirect()->back()->with('error', 'Cliente não encontrado.');
+        }
+
+        $cliente->delete();
+        return redirect()->back()->with('success', 'Cliente deletado com sucesso.');
+    }
+
 }
