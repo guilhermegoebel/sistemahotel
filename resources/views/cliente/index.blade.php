@@ -4,8 +4,8 @@
 
 @section('content')
     <h1>Cliente :D</h1>
-    <li>
-        <ul><a href="/cliente/get">Tabela tem tudo (tetudo)</a></ul>
-        <ul><a href="/cliente/add">Adicionar cliente</a></ul>
-    </li>
+    <ul>
+        <li><a href="/cliente/get">Tabela tem tudo (tetudo)</a></li>
+        <li><a href="/cliente/add">Adicionar cliente</a></li>
+    </ul>
 @endsection
