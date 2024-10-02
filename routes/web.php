@@ -22,5 +22,12 @@ Route::get('/cliente', [ClienteController::class, 'index'])->name('cliente.index
 
 Route::get('/cliente/get', [ClienteController::class, 'getAll'])->name('cliente.tabela');
 
-Route::get('/cliente/add', [ClienteController::class, 'formCliente'])->name('cliente.form');
+Route::get('/cliente/add', [ClienteController::class, 'formCliente'])->name('cliente.add');
 
+Route::post('/cliente/add', [ClienteController::class, 'add'])->name('cliente.add');
+
+Route::get('/cliente/{id}/edit', [ClienteController::class, 'edit'])->name('cliente.edit');
+
+Route::put('/cliente/{id}', [ClienteController::class, 'update'])->name('cliente.update');
+
+Route::delete('/cliente/{id}', [ClienteController::class, 'delete'])->name('cliente.delete');
