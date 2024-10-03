@@ -12,8 +12,10 @@
     <div class="collapse navbar-collapse">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item"><a class="nav-link" href="/">Página Inicial</a></li>
-            <li class="nav-item"><a class="nav-link" href="/reserva">Reservas</a></li>
+            <li class="nav-item"><a class="nav-link" href="/reservas">Reservas</a></li>
             <li class="nav-item"><a class="nav-link" href="/cliente">Clientes</a></li>
+            <li class="nav-item"><a class="nav-link" href="/checkin">Check-in</a></li>
+            <li class="nav-item"><a class="nav-link" href="/checkout">Check-out</a></li>
         </ul>
     </div>
 </nav>
