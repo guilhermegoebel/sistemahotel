@@ -3,13 +3,25 @@
 @section('title', 'Criar Reserva')
 
 @section('content')
-    <h1>Criar Nova Reserva</h1>
+    <h1>Adicionar Nova Reserva</h1>
 
-    <form action="{{ route('reservas.store') }}" method="POST">
+    @if ($errors->any())
+        <div class="alert alerta-perigo">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li> {{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+
+    <form action="{{ route('reservas.add') }}" method="POST">
         @csrf
         <div class="form-group">
-            <label for="cliente">Cliente</label>
+            <label for="id_cliente">Cliente</label>
             <select name="id_cliente" class="form-control" required>
+                <option value="">Selecione um cliente</option>
                 @foreach($clientes as $cliente)
                     <option value="{{ $cliente->id_cliente }}">{{ $cliente->nome }}</option>
                 @endforeach
@@ -31,11 +43,7 @@
             <input type="number" name="quartos" class="form-control" required>
         </div>
 
-        <div class="form-group">
-            <label for="status">Status</label>
-            <input type="text" name="status" class="form-control">
-        </div>
-
         <button type="submit" class="btn btn-primary">Salvar Reserva</button>
+        <a href="{{ route('reservas.index') }}" class="btn btn-secondary">Cancelar</a>
     </form>
 @endsection

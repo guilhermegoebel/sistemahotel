@@ -33,7 +33,7 @@
 
             <div class="form-group">
                 <label for="data_nascimento">Data de Nascimento</label>
-                <input type="text" name="data_nascimento" value="{{ $cliente->data_nascimento }}" class="form-control" required>
+                <input type="date" name="data_nascimento" value="{{ $cliente->data_nascimento }}" class="form-control" required>
             </div>
 
             <div class="form-group">

@@ -8,7 +8,8 @@ use App\Models\Cliente;
 class ClienteController extends Controller
 {
     public function index() {
-        return view('cliente.index');
+        $clientes = Cliente::all();
+        return view('cliente.index', compact('clientes'));
     }
 
     public function formCliente() {

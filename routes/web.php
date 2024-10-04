@@ -20,35 +20,24 @@ Route::get('/', function () {
     return view('home');
 });
 
+// Rotas cliente
 Route::get('/cliente', [ClienteController::class, 'index'])->name('cliente.index');
-
-Route::get('/cliente/get', [ClienteController::class, 'getAll'])->name('cliente.tabela');
-
 Route::get('/cliente/add', [ClienteController::class, 'formCliente'])->name('cliente.add');
-
 Route::post('/cliente/add', [ClienteController::class, 'add'])->name('cliente.add');
-
 Route::get('/cliente/{id}/edit', [ClienteController::class, 'edit'])->name('cliente.edit');
-
 Route::put('/cliente/{id}', [ClienteController::class, 'update'])->name('cliente.update');
-
 Route::delete('/cliente/{id}', [ClienteController::class, 'delete'])->name('cliente.delete');
 
+// Rotas checkin/checkout
 Route::get('/checkin', [CheckinoutController::class, 'checkin'])->name('checkin.index');
-
 Route::get('/checkout', [CheckinoutController::class, 'checkout'])->name('checkout.index');
 
+// Rotas reservas
 Route::get('/reservas', [ReservaController::class, 'index'])->name('reservas.index');
-
-Route::get('/reservas/create', [ReservaController::class, 'create'])->name('reservas.create');
-
-Route::post('/reservas', [ReservaController::class, 'store'])->name('reservas.store');
-
-Route::get('/reservas/{id}', [ReservaController::class, 'show'])->name('reservas.show');
-
+Route::get('/reservas/add', [ReservaController::class, 'formReserva'])->name('reservas.add');
+Route::post('/reservas/add', [ReservaController::class, 'add'])->name('reservas.add');
+Route::get('/reservas/{id}', [ReservaController::class, 'getById'])->name('reservas.show');
 Route::get('/reservas/{id}/edit', [ReservaController::class, 'edit'])->name('reservas.edit');
-
 Route::put('/reservas/{id}', [ReservaController::class, 'update'])->name('reservas.update');
-
 Route::delete('/reservas/{id}', [ReservaController::class, 'delete'])->name('reservas.delete');
 

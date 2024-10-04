@@ -8,10 +8,9 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">O TEL</a>
+    <a class="navbar-brand" href="/"><img src="https://raw.githubusercontent.com/shii-ge/shii-ge/refs/heads/main/img/logo.png" height="40"></a>
     <div class="collapse navbar-collapse">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item"><a class="nav-link" href="/">Página Inicial</a></li>
             <li class="nav-item"><a class="nav-link" href="/reservas">Reservas</a></li>
             <li class="nav-item"><a class="nav-link" href="/cliente">Clientes</a></li>
             <li class="nav-item"><a class="nav-link" href="/checkin">Check-in</a></li>
