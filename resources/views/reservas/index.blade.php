@@ -23,7 +23,6 @@
                 <td colspan="5">Nenhuma reserva encontrada.</td>
             </tr>
         @else
-
             @foreach($reservas as $reserva)
                 <tr>
                     <td>{{ $reserva->cliente->nome }}</td>
@@ -38,6 +37,17 @@
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
                         </form>
+                        @if($reserva->status == 'pendente')
+                            <form action="{{ route('reservas.checkin', $reserva->id_reserva) }}" method="POST" style="display:inline;">
+                                @csrf
+                                <button type="submit" class="btn btn-success btn-sm">Check-in</button>
+                            </form>
+                        @elseif($reserva->status == 'confirmada')
+                            <form action="{{ route('reservas.checkout', $reserva->id_reserva) }}" method="POST" style="display:inline;">
+                                @csrf
+                                <button type="submit" class="btn btn-secondary btn-sm">Check-out</button>
+                            </form>
+                        @endif
                     </td>
                 </tr>
             @endforeach

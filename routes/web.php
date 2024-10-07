@@ -29,8 +29,10 @@ Route::put('/cliente/{id}', [ClienteController::class, 'update'])->name('cliente
 Route::delete('/cliente/{id}', [ClienteController::class, 'delete'])->name('cliente.delete');
 
 // Rotas checkin/checkout
-Route::get('/checkin', [CheckinoutController::class, 'checkin'])->name('checkin.index');
-Route::get('/checkout', [CheckinoutController::class, 'checkout'])->name('checkout.index');
+Route::get('/checkin', [CheckinoutController::class, 'checkinTela'])->name('checkin.index');
+Route::get('/checkout', [CheckinoutController::class, 'checkoutTela'])->name('checkout.index');
+Route::post('/reservas/{id}/checkin', [CheckinOutController::class, 'checkin'])->name('reservas.checkin');
+Route::post('/reservas/{id}/checkout', [CheckinOutController::class, 'checkout'])->name('reservas.checkout');
 
 // Rotas reservas
 Route::get('/reservas', [ReservaController::class, 'index'])->name('reservas.index');
