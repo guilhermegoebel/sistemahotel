@@ -1,21 +1,8 @@
 @extends('app')
-
 @section('title', 'Criar Reserva')
+@section('h1', 'Adicionar Nova Reserva')
 
 @section('content')
-    <h1>Adicionar Nova Reserva</h1>
-
-    @if ($errors->any())
-        <div class="alert alerta-perigo">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li> {{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-
-
     <form action="{{ route('reservas.add') }}" method="POST">
         @csrf
         <div class="form-group">

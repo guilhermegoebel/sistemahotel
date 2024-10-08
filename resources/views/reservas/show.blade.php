@@ -1,10 +1,8 @@
 @extends('app')
-
 @section('title', 'Detalhes da Reserva')
+@section('h1', 'Detalhes da Reserva')
 
 @section('content')
-    <h1>Detalhes da Reserva</h1>
-
     <ul>
         <li><strong>Cliente:</strong> {{ $reserva->cliente->nome }}</li>
         <li><strong>Check-in:</strong> {{ $reserva->data_checkin }}</li>

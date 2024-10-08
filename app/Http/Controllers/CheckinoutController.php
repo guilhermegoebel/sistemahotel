@@ -7,6 +7,11 @@ use App\Models\Reserva;
 
 class CheckinoutController extends Controller
 {
+
+    public function index() {
+        $reservas = Reserva::all();
+        return view('checkinout.index', compact('reservas'));
+    }
     public function checkinTela(){
         $reservas = Reserva::all();
         return view('checkin.index', compact('reservas'));

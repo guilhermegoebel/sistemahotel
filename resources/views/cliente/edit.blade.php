@@ -1,20 +1,8 @@
 @extends('app')
-
 @section('title', 'Cliente :: Editar')
+@section('h1', 'Editar Cliente')
 @section('content')
     <div class="container">
-        <h1>Editar Cliente</h1>
-
-        <!--Veja se n tem erro -->
-        @if ($errors->any())
-            <div class="alert alerta-perigo">
-                <ul>
-                    @foreach($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
 
         <!-- Formulario poggers agora -->
         <form action=" {{ route('cliente.update', $cliente->id_cliente)  }}" method="POST">

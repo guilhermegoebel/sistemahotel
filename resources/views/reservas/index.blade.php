@@ -1,12 +1,9 @@
 @extends('app')
-
 @section('title', 'Lista de Reservas')
+@section('h1', 'Reservas')
 
 @section('content')
-    <h1>Reservas</h1>
-
     <a href="{{ route('reservas.add') }}" class="btn btn-primary mb-3">Adicionar Nova Reserva</a>
-
     <table class="table table-striped">
         <thead>
         <tr>

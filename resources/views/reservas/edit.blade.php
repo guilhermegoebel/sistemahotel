@@ -1,35 +1,9 @@
 @extends('app')
-
 @section('title', 'Editar Reserva')
+@section('h1', 'Reservas')
 
 @section('content')
     <div class="container">
-        <h1>Editar Reserva</h1>
-
-        <!-- Só mensagem de sucesso ou erro -->
-        @if(session('success'))
-            <div class="alert alert-deuboa">
-                {{ session('success') }}
-            </div>
-        @endif
-
-        @if(session('error'))
-            <div class="alert alert-deubarba">
-                {{ session('error') }}
-            </div>
-        @endif
-
-        <!-- Veja se nao tem erro -->
-        @if ($errors->any())
-            <div class="alert alert-deubarba">
-                <ul>
-                    @foreach($errors->all() as $error)
-                        <li> {{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-
         <!-- Forla Mário (Que mário?)-->
         <form action="{{ route('reservas.update', $reserva->id_reserva) }}" method="POST">
             @csrf

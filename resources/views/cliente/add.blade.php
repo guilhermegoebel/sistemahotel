@@ -1,10 +1,9 @@
 @extends('app')
-
 @section('title', 'Cliente :: Formulário')
+@section('h1', 'Adicionar cliente')
 
 @section('content')
     <div class="container">
-        <h1>Adicionar cliente</h1>
         <form action=" {{ route('cliente.add')  }}" method="POST">
             @csrf
 

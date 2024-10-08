@@ -15,10 +15,39 @@
             <li class="nav-item"><a class="nav-link" href="/cliente">Clientes</a></li>
             <li class="nav-item"><a class="nav-link" href="/checkin">Check-in</a></li>
             <li class="nav-item"><a class="nav-link" href="/checkout">Check-out</a></li>
+            <li class="nav-item"><a class="nav-link" href="/quartos">Quartos</a></li>
+            <li class="nav-item"><a class="nav-link" href="/checkinout">[en costrussao...]</a></li>
         </ul>
     </div>
 </nav>
 <div class="container">
+    <h1>@yield('h1')</h1>
+
+    <!-- Veja se nao tem acerto (retorno de função) -->
+    @if(session('success'))
+        <div class="alert alerta-poggers" style="background: rgba(161,224,154,0.69); color: #043f04; font-weight: bold; border-radius: 10px;">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    <!--Veja se nao tem erro (retorno de função) -->
+    @if(session('error'))
+        <div class="alert alerta-perigo" style="background: rgba(243,140,155,0.69); color: #650b0b; font-weight: bold; border-radius: 10px;">
+            {{ session('error') }}
+        </div>
+    @endif
+
+    <!-- Veja se nao tem erro (requisição)-->
+    @if ($errors->any())
+        <div class="alert alert-deubarba" style= "background: rgba(243,140,155,0.69); color: #650b0b; font-weight: bold; border-radius: 10px;">
+            <ul>
+                @foreach($errors->all() as $error)
+                    <li> {{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
     @yield('content')
 </div>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
