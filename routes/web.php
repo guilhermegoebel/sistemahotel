@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CheckinoutController;
 use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\QuartoController;
 use App\Http\Controllers\ReservaController;
 use Illuminate\Support\Facades\Route;
 
@@ -27,6 +28,14 @@ Route::post('/cliente/add', [ClienteController::class, 'add'])->name('cliente.ad
 Route::get('/cliente/{id}/edit', [ClienteController::class, 'edit'])->name('cliente.edit');
 Route::put('/cliente/{id}', [ClienteController::class, 'update'])->name('cliente.update');
 Route::delete('/cliente/{id}', [ClienteController::class, 'delete'])->name('cliente.delete');
+
+// Rotas quarto
+Route::get('/quartos', [QuartoController::class, 'index'])->name('quarto.index');
+Route::get('/quartos/create', [QuartoController::class, 'formQuarto'])->name('quarto.add');
+Route::post('/quartos', [QuartoController::class, 'add'])->name('quarto.create');
+Route::get('/quartos/{id}/edit', [QuartoController::class, 'edit'])->name('quarto.edit');
+Route::put('/quartos/{id}', [QuartoController::class, 'update'])->name('quarto.update');
+Route::delete('/quartos/{id}', [QuartoController::class, 'delete'])->name('quarto.delete');
 
 // Rotas checkin/checkout
 Route::get('/checkin', [CheckinoutController::class, 'checkinTela'])->name('checkin.index');

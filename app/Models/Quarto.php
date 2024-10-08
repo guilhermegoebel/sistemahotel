@@ -11,6 +11,7 @@ class Quarto extends Model
 
     protected $table = 'quarto';
     protected $primaryKey = 'id_quarto';
+    public $timestamps = false;
 
     protected $fillable = [
         'valor',
