@@ -26,7 +26,7 @@
                             <td>{{ $reserva->cliente->email }}</td>
                             <td>{{ $reserva->cliente->telefone }}</td>
                             <td>
-                                <form action="{{}}" method="post">
+                                <form method="post">
                                     <button type="submit" class="btn btn-success btn-sm">Check-in</button>
                                 </form>
                             </td>

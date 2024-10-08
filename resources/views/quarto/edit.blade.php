@@ -15,7 +15,7 @@
 
             <div class="form-group">
                 <label for="valor">Valor</label>
-                <input type="number" id="valor" name="valor" value="{{ $quarto->valor }}" class="form-control" required>
+                <input type="text" id="valor" name="valor" value="{{ $quarto->valor }}" class="form-control" required>
             </div>
 
             <button type="submit" class="btn btn-primary">Salvar Alterações</button>
@@ -24,6 +24,10 @@
     </div>
 @endsection
 
-<script type="module">
-    $('#valor').mask('000.000.000,00', {reverse: true});
-</script>
+@section('scripts')
+    <script type="module">
+        $(document).ready(function(){
+            $('#valor').mask('000.000.000,00', {reverse: true});
+        });
+    </script>
+@endsection

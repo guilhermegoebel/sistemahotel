@@ -28,11 +28,6 @@ class Reserva extends Model
         return $this->belongsTo(Cliente::class, 'id_cliente', 'id_cliente');
     }
 
-    public function acompanhantes()
-    {
-        return $this->hasMany(Acompanhante::class, 'id_reserva', 'id_reserva');
-    }
-
     public function quartos()
     {
         return $this->belongsToMany(Quarto::class, 'reserva_quarto', 'id_reserva', 'id_quarto');

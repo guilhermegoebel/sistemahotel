@@ -96,54 +96,6 @@ class ReservaController extends Controller
         return redirect()->route('reservas.index')->with('success', 'Reserva atualizada com sucesso!');
     }
 
-    //Provavelmente essa aqui vai pro CheckinoutController
-    public function confirmCheckin($id)
-    {
-        $reserva = Reserva::find($id);
-
-        if (!$reserva) {
-            return response()->json(['message' => 'ERRO: Reserva não encontrada'], 404);
-        } else {
-            if ($reserva->checkin_confirmado) {
-                return response()->json(['message' => 'Este checkin já foi confirmado.']);
-            } else {
-                $reserva->checkin_confirmado = true;
-                $reserva->save();
-                return response()->json(['message' => 'Checkin confirmado.'], 200);
-            }
-        }
-    }
-
-    //Provavelmente essa aqui vai pro CheckinoutController
-    public function confirmCheckout($id)
-    {
-        $reserva = Reserva::find($id);
-
-        if (!$reserva) {
-            return response()->json(['message' => 'ERRO: Reserva não encontrada'], 404);
-        } else {
-            if ($reserva->checkin_confirmado) {
-                if ($reserva->checkout_confirmado) {
-                    return response()->json(['message' => 'Este checkout já foi confirmado.']);
-                } else {
-                    $reserva->checkout_confirmado = true;
-                    $reserva->save();
-                    return response()->json(['message' => 'Checkout confirmado.'], 200);
-                }
-            } else {
-                return response()->json(['message' => 'ERRO: Não houve confirmação de checkin.', 400]);
-            }
-        }
-    }
-
-    public function getAll()
-    {
-        // Pega todas as reservas do banco de dados
-        $reservas = Reserva::with(['cliente', 'quartos'])->get();
-
-        return view('reservas.index', compact('reservas'));
-    }
-
     public function getById($id)
     {
         // Tenta encontrar a reserva com o ID
