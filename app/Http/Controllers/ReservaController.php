@@ -94,7 +94,7 @@ class ReservaController extends Controller
         $reserva = Reserva::find($id);
 
         if (!$reserva) {
-            return redirect->route('reservas.index')->with('error', 'Reserva não encontrada.');
+            return redirect()->route('reservas.index')->with('error', 'Reserva não encontrada.');
         }
 
         // Veja se o status da reserva é pendente
