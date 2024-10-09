@@ -42,7 +42,7 @@ class ReservaController extends Controller
         $reserva->quartos()->attach($validatedData['quartos']);
 
         // Calcula o valor total da reserva com base nos quartos
-        $totalValor = Quarto::whereIn('id_quarto', $validatedData['quartos'])->sum('valor');
+        $totalValor = Quarto::whereIn('quarto.id_quarto', $validatedData['quartos'])->sum('quarto.valor');
         $reserva->update(['valor' => $totalValor]);
 
         return redirect()->route('reservas.index')->with('success', 'Reserva criada com sucesso!');
@@ -51,13 +51,15 @@ class ReservaController extends Controller
     public function edit($id) {
         $reserva = Reserva::find($id);
         $clientes = Cliente::all();
+        $quartos = Quarto::all();
+        $quartosSelecionados = $reserva->quartos()->pluck('quarto.id_quarto')->toArray();
 
         if (!$reserva) {
             return redirect()->back()->with('error', 'Reserva não encontrada');
         }
 
         //Retorna a view do caba
-        return view('reservas.edit', compact('reserva', 'clientes'));
+        return view('reservas.edit', compact('reserva', 'clientes', 'quartos', 'quartosSelecionados'));
     }
 
     public function update(Request $request, $id)
@@ -66,12 +68,8 @@ class ReservaController extends Controller
             'id_cliente' => 'required|exists:cliente,id_cliente',
             'data_checkin' => 'date',
             'data_checkout' => 'date|after_or_equal:data_checkin',
-            //Aqui o valor ta sendo alterado manualmente, a gente vai mudar esse troço
-            //'valor' => 'required|numeric',
-            'status' => 'required|string|max:255',
-            // 'quartos' => 'required|array',
-            'quartos' => 'required|numeric',
-            // 'quartos.*' => 'exists:quarto,id_quarto',
+            'quartos' => 'required|array',
+            'quartos.*' => 'exists:quarto,id_quarto',
         ]);
 
         $reserva = Reserva::find($id);
@@ -84,18 +82,29 @@ class ReservaController extends Controller
             'id_cliente' => $validatedData['id_cliente'],
             'data_checkin' => $validatedData['data_checkin'],
             'data_checkout' => $validatedData['data_checkout'],
-            'valor' => 0, //$validatedData['valor'],
-            'status' => $validatedData['status'],
-            'quartos' => $validatedData['quartos'],
-            // 'valor' => $validatedData['valor'],
         ]);
 
         // Atualiza os quartos q tao atacado na reserva
-        //if(isset($validatedData['quartos'])) {
-            //$reserva->quartos()->sync($validatedData['quartos']);
-        //}
+        $reserva->quartos()->sync($validatedData['quartos']);
 
         return redirect()->route('reservas.index')->with('success', 'Reserva atualizada com sucesso!');
+    }
+
+    public function cancelar($id) {
+        $reserva = Reserva::find($id);
+
+        if (!$reserva) {
+            return redirect->route('reservas.index')->with('error', 'Reserva não encontrada.');
+        }
+
+        // Veja se o status da reserva é pendente
+        if($reserva->status !== 'pendente') {
+            return redirect()->route('reservas.index')->with('error', 'A reserva não pode ser cancelada, pois não está pendente');
+        }
+
+        $reserva->update(['status' => 'cancelada']);
+
+        return redirect()->route('reservas.index')->with('success', 'Reserva Cancelada com sucesso');
     }
 
     public function getById($id)

@@ -51,6 +51,8 @@ Route::get('/reservas/{id}', [ReservaController::class, 'getById'])->name('reser
 Route::get('/reservas/{id}/edit', [ReservaController::class, 'edit'])->name('reservas.edit');
 Route::put('/reservas/{id}', [ReservaController::class, 'update'])->name('reservas.update');
 Route::delete('/reservas/{id}', [ReservaController::class, 'delete'])->name('reservas.delete');
+Route::put('/reservas/{id}/cancelar', [ReservaController::class, 'cancelar'])->name('reservas.cancelar');
+
 
 // Rotas CheckInOut
 Route::get('/checkinout', [CheckinoutController::class, 'index'])->name('checkinout.index');

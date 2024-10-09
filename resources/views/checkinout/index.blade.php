@@ -24,7 +24,7 @@
                         <tr>
                             <td><b>{{ $reserva->cliente->nome }}</b></td>
                             <td>{{ $reserva->cliente->email }}</td>
-                            <td>{{ $reserva->data_checkin }}</td>
+                            <td>{{ \Carbon\Carbon::parse($reserva->data_checkin)->format('d/m/Y') }}</td>
                             <td>
                                 <form action="{{ route('reservas.checkin', $reserva->id_reserva) }}" method="POST" style="display:inline;">
                                     @csrf
@@ -56,7 +56,7 @@
                         <tr>
                             <td><b>{{ $reserva->cliente->nome }}</b></td>
                             <td>{{ $reserva->cliente->email }}</td>
-                            <td>{{ $reserva->data_checkout }}</td>
+                            <td>{{ \Carbon\Carbon::parse($reserva->data_checkout)->format('d/m/Y') }}</td>
                             <td>
                                 <form action="{{ route('reservas.checkout', $reserva->id_reserva) }}" method="POST" style="display:inline;">
                                     @csrf

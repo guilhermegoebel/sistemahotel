@@ -5,8 +5,8 @@
 @section('content')
     <ul>
         <li><strong>Cliente:</strong> {{ $reserva->cliente->nome }}</li>
-        <li><strong>Check-in:</strong> {{ $reserva->data_checkin }}</li>
-        <li><strong>Check-out:</strong> {{ $reserva->data_checkout }}</li>
+        <li><strong>Check-in:</strong> {{ $reserva->data_checkin->format('d/m/Y') }}</li>
+        <li><strong>Check-out:</strong> {{ $reserva->data_checkout->format('d/m/Y') }}</li>
         <li><strong>Quartos reservados: </strong>
             <ul>
                 @foreach($reserva->quartos as $quarto)

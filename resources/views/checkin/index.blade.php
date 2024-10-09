@@ -19,7 +19,7 @@
                     <td>{{ $reserva->cliente->nome }}</td>
                     <td>{{ $reserva->cliente->email }}</td>
                     <td>{{ $reserva->cliente->telefone }}</td>
-                    <td>{{ $reserva->data_checkin }}</td>
+                    <td>{{ \Carbon\Carbon::parse($reserva->data_checkin)->format('d/m/Y') }}</td>
                 </tr>
             @endif
         @endforeach

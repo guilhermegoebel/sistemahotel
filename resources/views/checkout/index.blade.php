@@ -9,6 +9,7 @@
             <th>Nome</th>
             <th>Email</th>
             <th>Telefone</th>
+            <th>Data check-in</th>
             <th>Data check-out</th>
         </tr>
         </thead>
@@ -19,7 +20,8 @@
                     <td>{{ $reserva->cliente->nome }}</td>
                     <td>{{ $reserva->cliente->email }}</td>
                     <td>{{ $reserva->cliente->telefone }}</td>
-                    <td>{{ $reserva->data_checkout }}</td>
+                    <td>{{ \Carbon\Carbon::parse($reserva->data_checkin)->format('d/m/Y') }}</td>
+                    <td>{{ \Carbon\Carbon::parse($reserva->data_checkout)->format('d/m/Y') }}</td>
                 </tr>
             @endif
         @endforeach
