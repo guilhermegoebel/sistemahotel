@@ -27,7 +27,7 @@ class ClienteController extends Controller
             'nome' => 'required|string|max:255',
             'cpf' => 'required|string|max:14|unique:cliente,cpf',
             'data_nascimento' => 'required|date',
-            'telefone' => 'required|string|max:15',
+            'telefone' => 'required|string|max:255',
             'email' => 'required|email|max:255|unique:cliente,email',
             'endereco' => 'required|string|max:255',
         ]);
@@ -65,7 +65,7 @@ class ClienteController extends Controller
             'nome' => 'required|string|max:255',
             'cpf' => 'required|string|max:14|unique:cliente,cpf, ' .$id. ',id_cliente',
             'data_nascimento' => 'required|date',
-            'telefone' => 'required|string|max:15',
+            'telefone' => 'required|string|max:255',
             'email' => 'required|email|max:255|unique:cliente,email, ' .$id. ' ,id_cliente',
             'endereco' => 'required|string|max:255',
         ]);
