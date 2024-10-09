@@ -27,21 +27,23 @@ class ReservaController extends Controller
             'id_cliente' => 'required|exists:cliente,id_cliente',
             'data_checkin' => 'required|date',
             'data_checkout' => 'required|date|after_or_equal:data_checkin',
-            'quartos' => 'required|numeric',
-            //'quartos.*' => 'exists:quarto,id_quarto',
+            'quartos' => 'required|array',
+            'quartos.*' => 'exists:quarto,id_quarto',
         ]);
 
         $reserva = Reserva::create([
             'id_cliente' => $validatedData['id_cliente'],
             'data_checkin' => $validatedData['data_checkin'],
             'data_checkout' => $validatedData['data_checkout'],
-            'valor' => 0, //$validatedData['valor'],
-            'status' => 'pendente', //$validatedData['status'],
-            'quartos' => $validatedData['quartos'],
+            'valor' => 0, //Vai ser baguiado depois
+            'status' => 'pendente',
         ]);
 
-        //Atacar os quartos na reserva
-        //$reserva->quartos()->attach($validatedData['quartos']);
+        $reserva->quartos()->attach($validatedData['quartos']);
+
+        // Calcula o valor total da reserva com base nos quartos
+        $totalValor = Quarto::whereIn('id_quarto', $validatedData['quartos'])->sum('valor');
+        $reserva->update(['valor' => $totalValor]);
 
         return redirect()->route('reservas.index')->with('success', 'Reserva criada com sucesso!');
     }

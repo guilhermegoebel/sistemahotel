@@ -26,8 +26,13 @@
         </div>
 
         <div class="form-group">
-            <label for="quartos">Número de Quartos</label>
-            <input type="number" name="quartos" class="form-control" required>
+            <label for="quartos">Selecione os quartos:</label>
+            @foreach($quartos as $quarto)
+                <div>
+                    <input type="checkbox" name="quartos[]" value="{{ $quarto->id_quarto }}">
+                    {{ $quarto->tipo }} - R$ {{ number_format($quarto->valor, 2, ',', '.') }}
+                </div>
+            @endforeach
         </div>
 
         <button type="submit" class="btn btn-primary">Salvar Reserva</button>

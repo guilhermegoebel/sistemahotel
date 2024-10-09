@@ -55,18 +55,6 @@
                                 </div>
                             </div>
                         </div>
-
-                        @if($reserva->status == 'pendente')
-                            <form action="{{ route('reservas.checkin', $reserva->id_reserva) }}" method="POST" style="display:inline;">
-                                @csrf
-                                <button type="submit" class="btn btn-success btn-sm">Check-in</button>
-                            </form>
-                        @elseif($reserva->status == 'confirmada')
-                            <form action="{{ route('reservas.checkout', $reserva->id_reserva) }}" method="POST" style="display:inline;">
-                                @csrf
-                                <button type="submit" class="btn btn-secondary btn-sm">Check-out</button>
-                            </form>
-                        @endif
                     </td>
                 </tr>
             @endforeach

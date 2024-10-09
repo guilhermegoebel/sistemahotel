@@ -3,8 +3,8 @@
 @section('h1', 'Checkin/Checkout')
 
 @section('content')
-    <a href="" class="btn btn-primary mb-3">Histórico de check-ins</a>
-    <a href="" class="btn btn-primary mb-3">Histórico de check-outs</a>
+    <a href="/checkin" class="btn btn-primary mb-3">Histórico de check-ins</a>
+    <a href="/checkout" class="btn btn-primary mb-3">Histórico de check-outs</a>
     <div class="row">
         <div class="col-md-6">
             <!-- Tabela de checkin (feito pelo amigão) -->
@@ -14,7 +14,7 @@
                 <tr>
                     <th>Nome</th>
                     <th>Email</th>
-                    <th>Telefone</th>
+                    <th>Check-in</th>
                     <th>Ações</th>
                 </tr>
                 </thead>
@@ -22,11 +22,12 @@
                 @foreach($reservas as $reserva)
                     @if($reserva->status == 'pendente')
                         <tr>
-                            <td>{{ $reserva->cliente->nome }}</td>
+                            <td><b>{{ $reserva->cliente->nome }}</b></td>
                             <td>{{ $reserva->cliente->email }}</td>
-                            <td>{{ $reserva->cliente->telefone }}</td>
+                            <td>{{ $reserva->data_checkin }}</td>
                             <td>
-                                <form method="post">
+                                <form action="{{ route('reservas.checkin', $reserva->id_reserva) }}" method="POST" style="display:inline;">
+                                    @csrf
                                     <button type="submit" class="btn btn-success btn-sm">Check-in</button>
                                 </form>
                             </td>
@@ -45,7 +46,7 @@
                 <tr>
                     <th>Nome</th>
                     <th>Email</th>
-                    <th>Telefone</th>
+                    <th>Checkout</th>
                     <th>Ações</th>
                 </tr>
                 </thead>
@@ -53,12 +54,13 @@
                 @foreach($reservas as $reserva)
                     @if($reserva->status == 'confirmada')
                         <tr>
-                            <td>{{ $reserva->cliente->nome }}</td>
+                            <td><b>{{ $reserva->cliente->nome }}</b></td>
                             <td>{{ $reserva->cliente->email }}</td>
-                            <td>{{ $reserva->cliente->telefone }}</td>
+                            <td>{{ $reserva->data_checkout }}</td>
                             <td>
-                                <form action="{{}}" method="post">
-                                    <button type="submit" class="btn btn-success btn-sm">Check-out</button>
+                                <form action="{{ route('reservas.checkout', $reserva->id_reserva) }}" method="POST" style="display:inline;">
+                                    @csrf
+                                    <button type="submit" class="btn btn-secondary btn-sm">Check-out</button>
                                 </form>
                             </td>
                         </tr>

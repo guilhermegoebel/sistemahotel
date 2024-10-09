@@ -4,23 +4,22 @@
 
 @section('content')
     <table class="table table-striped table-bordered">
-        <thead class="thead-dark">
+        <thead class="toast-dark">
         <tr>
-            <th>ID</th>
             <th>Nome</th>
             <th>Email</th>
             <th>Telefone</th>
-            <th></th>
+            <th>Data check-out</th>
         </tr>
         </thead>
         <tbody>
         @foreach($reservas as $reserva)
             @if($reserva->status == 'completa')
                 <tr>
-                    <td>{{ $reserva->id }}</td>
                     <td>{{ $reserva->cliente->nome }}</td>
                     <td>{{ $reserva->cliente->email }}</td>
                     <td>{{ $reserva->cliente->telefone }}</td>
+                    <td>{{ $reserva->data_checkout }}</td>
                 </tr>
             @endif
         @endforeach

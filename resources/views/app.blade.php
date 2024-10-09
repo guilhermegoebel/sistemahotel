@@ -20,7 +20,7 @@
             <li class="nav-item"><a class="nav-link" href="/checkin">Check-in</a></li>
             <li class="nav-item"><a class="nav-link" href="/checkout">Check-out</a></li>
             <li class="nav-item"><a class="nav-link" href="/quartos">Quartos</a></li>
-            <li class="nav-item"><a class="nav-link" href="/checkinout">[en costrussao...]</a></li>
+            <li class="nav-item"><a class="nav-link" href="/checkinout">Check-in/Check-out</a></li>
         </ul>
     </div>
 </nav>

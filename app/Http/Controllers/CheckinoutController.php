@@ -27,9 +27,9 @@ class CheckinoutController extends Controller
         if($reserva->status == 'pendente') {
             $reserva->status = 'confirmada';
             $reserva->save();
-            return redirect()->route('reservas.index')->with('success', 'Check-in realizado com sucesso!');
+            return redirect()->route('checkinout.index')->with('success', 'Check-in realizado com sucesso!');
         }
-        return redirect()->route('reservas.index')->with('error', 'Esta reserva não pode ser marcada como check-in.');
+        return redirect()->route('checkinout.index')->with('error', 'Esta reserva não pode ser marcada como check-in.');
     }
 
     public function checkout($id)
@@ -38,9 +38,9 @@ class CheckinoutController extends Controller
         if($reserva->status == 'confirmada') {
             $reserva->status = 'completa';
             $reserva->save();
-            return redirect()->route('reservas.index')->with('success', 'Check-out realizado com sucesso!');
+            return redirect()->route('checkinout.index')->with('success', 'Check-out realizado com sucesso!');
         }
-        return redirect()->route('reservas.index')->with('error', 'Esta reserva não pode ser marcada como check-out.');
+        return redirect()->route('checkinout.index')->with('error', 'Esta reserva não pode ser marcada como check-out.');
     }
 
 }
