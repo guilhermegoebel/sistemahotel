@@ -7,15 +7,19 @@ use App\Models\Quarto;
 use App\Models\Reserva;
 use Illuminate\Http\Request;
 
+use Carbon\Carbon;
+
 class ReservaController extends Controller
 {
-    public function index() {
+    public function index()
+    {
         $reservas = Reserva::all();
 
         return view('reservas.index', compact('reservas'));
     }
 
-    public function formReserva() {
+    public function formReserva()
+    {
         $clientes = Cliente::all();
         $quartos = Quarto::all();
         return view('reservas.add', compact('clientes', 'quartos'));
@@ -48,7 +52,8 @@ class ReservaController extends Controller
         return redirect()->route('reservas.index')->with('success', 'Reserva criada com sucesso!');
     }
 
-    public function edit($id) {
+    public function edit($id)
+    {
         $reserva = Reserva::find($id);
         $clientes = Cliente::all();
         $quartos = Quarto::all();
@@ -90,7 +95,8 @@ class ReservaController extends Controller
         return redirect()->route('reservas.index')->with('success', 'Reserva atualizada com sucesso!');
     }
 
-    public function cancelar($id) {
+    public function cancelar($id)
+    {
         $reserva = Reserva::find($id);
 
         if (!$reserva) {
@@ -98,7 +104,7 @@ class ReservaController extends Controller
         }
 
         // Veja se o status da reserva é pendente
-        if($reserva->status !== 'pendente') {
+        if ($reserva->status !== 'pendente') {
             return redirect()->route('reservas.index')->with('error', 'A reserva não pode ser cancelada, pois não está pendente');
         }
 
@@ -114,7 +120,21 @@ class ReservaController extends Controller
 
         // Verifica se a reserva foi encontrada
         if ($reserva) {
-            return view('reservas.show', compact('reserva'));
+            // Calcula a quantidade de dias entre check-in e check-out
+            $dataCheckin = Carbon::parse($reserva->data_checkin);
+            $dataCheckout = Carbon::parse($reserva->data_checkout);
+            $diasHospedagem = $dataCheckin->diffInDays($dataCheckout);
+
+            // Inicializa o valor total da reserva
+            $valorTotal = 0;
+
+            // Calcula o valor total considerando o número de dias
+            foreach ($reserva->quartos as $quarto) {
+                $valorTotal += $quarto->valor * $diasHospedagem;
+            }
+
+            // Passa o valor total para a view
+            return view('reservas.show', compact('reserva', 'valorTotal', 'diasHospedagem'));
         } else {
             return redirect()->route('reservas.index')->with('error', 'Reserva não encontrada.');
         }
