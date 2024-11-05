@@ -11,15 +11,15 @@ class Acompanhante extends Model
 
     protected $table = 'acompanhante';
     protected $primaryKey = 'id_acompanhante';
+    public $timestamps = false;
 
     protected $fillable = [
-        'id_reserva',
+        'id_cliente',
         'nome',
-        'tipo',
+        'idade',
     ];
 
-    public function reserva()
-    {
-        return $this->belongsTo(Reserva::class, 'id_reserva', 'id_reserva');
+    public function cliente() {
+        return $this->belongsTo(Cliente::class, 'id_cliente', 'id_cliente');
     }
 }

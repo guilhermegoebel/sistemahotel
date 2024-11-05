@@ -63,7 +63,7 @@ class ReservaController extends Controller
             return redirect()->back()->with('error', 'Reserva não encontrada');
         }
 
-        //Retorna a view do caba
+        // Retorna a view do caba
         return view('reservas.edit', compact('reserva', 'clientes', 'quartos', 'quartosSelecionados'));
     }
 
