@@ -25,6 +25,58 @@
             <input type="date" name="data_checkout" class="form-control" required>
         </div>
 
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#acompanhantesModal">
+            Adicionar acompanhante
+        </button>
+
+        <div class="modal fade" id="acompanhantesModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="modal-title">Acompanhantes</div>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>Idade</th>
+                                    <th>Selecionar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($acompanhantes as $acompanhante)
+                                    <tr>
+                                        <td>{{ $acompanhante->nome }}</td>
+                                        <td>{{ $acompanhante->idade }}</td>
+                                        <td>
+                                            <input type="checkbox" name="acompanhantes[]" value="{{ $acompanhante->id_acompanhante }}">
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+
+                        <!--Formulario novo do acompanhante -->
+                        <div class="title">Adicionar Acompanhante</div>
+                        <div>
+                            <label for="nome">Nome: </label>
+                            <input type="text" name="nome" id="nome">
+                        </div>
+                        <div>
+                            <label for="idade">Idade:</label>
+                            <input type="number" name="idade" id="idade">
+                        </div>
+                        <button type="button" id="adicionarAcompanhante" class="btn btn-secondary">Adicionar</button>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="form-group">
             <label for="quartos">Selecione os quartos:</label>
             @foreach($quartos as $quarto)

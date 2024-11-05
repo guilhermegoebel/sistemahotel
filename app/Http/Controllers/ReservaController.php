@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Acompanhante;
 use App\Models\Cliente;
 use App\Models\Quarto;
 use App\Models\Reserva;
@@ -22,7 +23,8 @@ class ReservaController extends Controller
     {
         $clientes = Cliente::all();
         $quartos = Quarto::all();
-        return view('reservas.add', compact('clientes', 'quartos'));
+        $acompanhantes = Acompanhante::all();
+        return view('reservas.add', compact('clientes', 'quartos', 'acompanhantes'));
     }
 
     public function add(Request $request)

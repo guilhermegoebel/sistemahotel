@@ -4,6 +4,7 @@ use App\Http\Controllers\CheckinoutController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\QuartoController;
 use App\Http\Controllers\ReservaController;
+use App\Http\Controllers\AcompanhanteController;
 use Illuminate\Support\Facades\Route;
 
 /*
