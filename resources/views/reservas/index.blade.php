@@ -81,6 +81,56 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- adicionar checkin (com modal)  nas acoes da tabela-->
+                        <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#modalCheckin-{{ $reserva->id_reserva }}">
+                            Check-in
+                        </button>
+                        <div class="modal fade" id="modalCheckin-{{ $reserva->id_reserva }}" tabindex="-1" aria-labelledby="modalLabelCheckin-{{ $reserva->id_reserva }}" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="modalLabelCheckin-{{ $reserva->id_reserva }}">Confirmar check-in</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Tem certeza que deseja fazer o check-in?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                        <form action="{{ route('reservas.checkin', $reserva->id_reserva) }}" method="POST" style="display:inline;">
+                                            @csrf
+                                            @method('POST')
+                                            <button type="submit" class="btn btn-danger">Sim </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#modalCheckout-{{ $reserva->id_reserva }}">
+                            Check-out
+                        </button>
+                        <div class="modal fade" id="modalCheckout-{{ $reserva->id_reserva }}" tabindex="-1" aria-labelledby="modalLabelCheckout-{{ $reserva->id_reserva }}" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="modalLabelCheckout-{{ $reserva->id_reserva }}">Confirmar check-out</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Tem certeza que deseja fazer o check-out?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                        <form action="{{ route('reservas.checkout', $reserva->id_reserva) }}" method="POST" style="display:inline;">
+                                            @csrf
+                                            @method('POST')
+                                            <button type="submit" class="btn btn-danger">Sim </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </td>
                 </tr>
             @endforeach

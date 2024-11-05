@@ -18,7 +18,7 @@
             <li class="nav-item"><a class="nav-link" href="/reservas">Reservas</a></li>
             <li class="nav-item"><a class="nav-link" href="/cliente">Clientes</a></li>
             <li class="nav-item"><a class="nav-link" href="/quartos">Quartos</a></li>
-            <li class="nav-item"><a class="nav-link" href="/checkinout">Check-in/Check-out</a></li>
+            <li class="nav-item"><a class="nav-link" href="/historico">Histórico de Check-in/Check-Out</a></li>
         </ul>
     </div>
 </nav>

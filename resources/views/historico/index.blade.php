@@ -1,34 +1,30 @@
 @extends('app')
-@section('title', 'Check-ins/Check-outs')
-@section('h1', 'Checkin/Checkout')
+@section('title', 'Histórico de Check-ins/Check-outs')
+@section('h1', 'Histórico')
 
+<!--nova secao com os historicos de check-in e check-out-->
 @section('content')
     <div class="row">
+        <!-- Histórico de Check-ins -->
         <div class="col-md-6">
-            <!-- Tabela de checkin -->
-            <h2>Check-in</h2>
+            <h2>Histórico de Check-ins Realizados</h2>
             <table class="table table-striped table-bordered">
                 <thead class="toast-dark">
                 <tr>
                     <th>Nome</th>
                     <th>Email</th>
-                    <th>Check-in</th>
-                    <th>Ações</th>
+                    <th>Telefone</th>
+                    <th>Data Check-in</th>
                 </tr>
                 </thead>
                 <tbody>
                 @foreach($reservas as $reserva)
-                    @if($reserva->status == 'pendente')
+                    @if($reserva->status == 'confirmada')
                         <tr>
-                            <td><b>{{ $reserva->cliente->nome }}</b></td>
+                            <td>{{ $reserva->cliente->nome }}</td>
                             <td>{{ $reserva->cliente->email }}</td>
+                            <td>{{ $reserva->cliente->telefone }}</td>
                             <td>{{ \Carbon\Carbon::parse($reserva->data_checkin)->format('d/m/Y') }}</td>
-                            <td>
-                                <form action="{{ route('reservas.checkin', $reserva->id_reserva) }}" method="POST" style="display:inline;">
-                                    @csrf
-                                    <button type="submit" class="btn btn-success btn-sm">Check-in</button>
-                                </form>
-                            </td>
                         </tr>
                     @endif
                 @endforeach
@@ -36,31 +32,28 @@
             </table>
         </div>
 
+        <!-- Histórico de Check-outs -->
         <div class="col-md-6">
-            <!-- Tabela de checkout (feito pelo amigão) -->
-            <h2>Check-out</h2>
+            <h2>Histórico de Check-outs Realizados</h2>
             <table class="table table-striped table-bordered">
                 <thead class="toast-dark">
                 <tr>
                     <th>Nome</th>
                     <th>Email</th>
-                    <th>Checkout</th>
-                    <th>Ações</th>
+                    <th>Telefone</th>
+                    <th>Data Check-in</th>
+                    <th>Data Check-out</th>
                 </tr>
                 </thead>
                 <tbody>
                 @foreach($reservas as $reserva)
-                    @if($reserva->status == 'confirmada')
+                    @if($reserva->status == 'completa')
                         <tr>
-                            <td><b>{{ $reserva->cliente->nome }}</b></td>
+                            <td>{{ $reserva->cliente->nome }}</td>
                             <td>{{ $reserva->cliente->email }}</td>
+                            <td>{{ $reserva->cliente->telefone }}</td>
+                            <td>{{ \Carbon\Carbon::parse($reserva->data_checkin)->format('d/m/Y') }}</td>
                             <td>{{ \Carbon\Carbon::parse($reserva->data_checkout)->format('d/m/Y') }}</td>
-                            <td>
-                                <form action="{{ route('reservas.checkout', $reserva->id_reserva) }}" method="POST" style="display:inline;">
-                                    @csrf
-                                    <button type="submit" class="btn btn-secondary btn-sm">Check-out</button>
-                                </form>
-                            </td>
                         </tr>
                     @endif
                 @endforeach

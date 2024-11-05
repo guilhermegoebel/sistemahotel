@@ -38,11 +38,8 @@ Route::get('/quartos/{id}/edit', [QuartoController::class, 'edit'])->name('quart
 Route::put('/quartos/{id}', [QuartoController::class, 'update'])->name('quarto.update');
 Route::delete('/quartos/{id}', [QuartoController::class, 'delete'])->name('quarto.delete');
 
-// Rotas checkin/checkout
-Route::get('/checkin', [CheckinoutController::class, 'checkinTela'])->name('checkin.index');
-Route::get('/checkout', [CheckinoutController::class, 'checkoutTela'])->name('checkout.index');
-Route::post('/reservas/{id}/checkin', [CheckinOutController::class, 'checkin'])->name('reservas.checkin');
-Route::post('/reservas/{id}/checkout', [CheckinOutController::class, 'checkout'])->name('reservas.checkout');
+//Rotas novas checkin/checkout (historico, para os de reservas ja realizadas)
+Route::get('/historico', [CheckinoutController::class, 'historico'])->name('historico.index');
 
 // Rotas reservas
 Route::get('/reservas', [ReservaController::class, 'index'])->name('reservas.index');
@@ -55,5 +52,6 @@ Route::delete('/reservas/{id}', [ReservaController::class, 'delete'])->name('res
 Route::put('/reservas/{id}/cancelar', [ReservaController::class, 'cancelar'])->name('reservas.cancelar');
 
 
-// Rotas CheckInOut
-Route::get('/checkinout', [CheckinoutController::class, 'index'])->name('checkinout.index');
+// Rotas CheckInOut (para os de reservas ainda pendentes)
+Route::post('/reservas/{id}/checkin', [CheckinOutController::class, 'checkin'])->name('reservas.checkin');
+Route::post('/reservas/{id}/checkout', [CheckinOutController::class, 'checkout'])->name('reservas.checkout');
