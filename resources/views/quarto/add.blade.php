@@ -4,7 +4,7 @@
 @section('content')
     <div class="container">
 
-        <form action=" {{ route('quarto.create') }}" method="POST">
+        <form action=" {{ route('quarto.create') }}" method="POST" id="form">
             @csrf
 
             <div class="form-group">
@@ -24,6 +24,17 @@
 @endsection
 
 @section('scripts')
+
+    <script type="module">
+        $('#form').on('submit', function() {
+            Swal.fire({
+                icon: 'info',
+                title: 'Aguarde...',
+                allowOutsideClick: false,
+                showConfirmButton: false,
+            });
+        });
+    </script>
     <script type="module">
         $(document).ready(function(){
             $('#valor').mask('000.000.000,00', {reverse: true});

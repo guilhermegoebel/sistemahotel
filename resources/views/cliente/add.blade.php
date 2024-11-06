@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="container">
-        <form action=" {{ route('cliente.add')  }}" method="POST">
+        <form action=" {{ route('cliente.add')  }}" method="POST" id="form">
             @csrf
 
             <div class="form-group">
@@ -41,4 +41,15 @@
 
         </form>
     </div>
+
+    <script type="module">
+        $('#form').on('submit', function() {
+            Swal.fire({
+                icon: 'info',
+                title: 'Aguarde...',
+                allowOutsideClick: false,
+                showConfirmButton: false,
+            });
+        });
+    </script>
 @endsection

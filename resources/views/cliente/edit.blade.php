@@ -5,7 +5,7 @@
     <div class="container">
 
         <!-- Formulario poggers agora -->
-        <form action=" {{ route('cliente.update', $cliente->id_cliente)  }}" method="POST">
+        <form action=" {{ route('cliente.update', $cliente->id_cliente)  }}" method="POST" id="form">
             @csrf
             @method('PUT')
 
@@ -43,4 +43,15 @@
 
         </form>
     </div>
+
+    <script type="module">
+        $('#form').on('submit', function() {
+            Swal.fire({
+                icon: 'info',
+                title: 'Aguarde...',
+                allowOutsideClick: false,
+                showConfirmButton: false,
+            });
+        });
+    </script>
 @endsection

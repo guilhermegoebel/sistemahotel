@@ -8,31 +8,45 @@ use App\Models\Reserva;
 class CheckinoutController extends Controller
 {
 
-    public function index() {
-        $reservas = Reserva::all();
-        return view('checkinout.index', compact('reservas'));
+    public function index()
+    {
+        try {
+            $reservas = Reserva::all();
+            return view('checkinout.index', compact('reservas'));
+        } catch (\Exception $e) {
+            return redirect()->route('checkinout.index')->with('error', 'Erro ao carregar reservas.');
+        }
     }
+
 
     public function checkin($id)
     {
-        $reserva = Reserva::find($id);
-        if($reserva->status == 'pendente') {
-            $reserva->status = 'confirmada';
-            $reserva->save();
-            return redirect()->route('reservas.index')->with('success', 'Check-in realizado com sucesso!');
+        try{
+            $reserva = Reserva::find($id);
+            if($reserva->status == 'pendente') {
+                $reserva->status = 'confirmada';
+                $reserva->save();
+                return redirect()->route('reservas.index')->with('success', 'Check-in realizado com sucesso!');
+            }
+            return redirect()->route('reservas.index')->with('error', 'Esta reserva não pode ser marcada como check-in.');
+        }catch (\Exception $e) {
+            return redirect()->route('reservas.index')->with('error', 'Erro ao marcar reserva como check-in');
         }
-        return redirect()->route('reservas.index')->with('error', 'Esta reserva não pode ser marcada como check-in.');
     }
 
     public function checkout($id)
     {
-        $reserva = Reserva::find($id);
-        if($reserva->status == 'confirmada') {
-            $reserva->status = 'completa';
-            $reserva->save();
-            return redirect()->route('reservas.index')->with('success', 'Check-out realizado com sucesso!');
+        try{
+            $reserva = Reserva::find($id);
+            if($reserva->status == 'confirmada') {
+                $reserva->status = 'completa';
+                $reserva->save();
+                return redirect()->route('reservas.index')->with('success', 'Check-out realizado com sucesso!');
+            }
+            return redirect()->route('reservas.index')->with('error', 'Esta reserva não pode ser marcada como check-out.');
+        }catch (\Exception $e) {
+            return redirect()->route('reservas.index')->with('error', 'Erro ao marcar reserva como check-out');
         }
-        return redirect()->route('reservas.index')->with('error', 'Esta reserva não pode ser marcada como check-out.');
     }
 
    //funçao do historico mas eu nao sei faze direito meu deus socorro me ajuda

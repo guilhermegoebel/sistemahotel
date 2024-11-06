@@ -5,7 +5,7 @@
 @section('content')
     <div class="container">
         <!-- Forla Mário (Que mário?)-->
-        <form action="{{ route('reservas.update', $reserva->id_reserva) }}" method="POST">
+        <form action="{{ route('reservas.update', $reserva->id_reserva) }}" method="POST" id="form">
             @csrf
             @method('PUT')
 
@@ -45,4 +45,15 @@
             <button type="submit" class="btn btn-primary">Atualizar Reserva</button>
         </form>
     </div>
+
+    <script type="module">
+        $('#form').on('submit', function() {
+            Swal.fire({
+                icon: 'info',
+                title: 'Aguarde...',
+                allowOutsideClick: false,
+                showConfirmButton: false,
+            });
+        });
+    </script>
 @endsection
