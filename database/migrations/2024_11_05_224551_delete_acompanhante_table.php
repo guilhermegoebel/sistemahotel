@@ -14,13 +14,11 @@ return new class extends Migration
         Schema::dropIfExists('acompanhante');
     }
 
+    /**
+     * Reverse the migrations.
+     */
     public function down(): void
     {
-        Schema::create('acompanhante', function (Blueprint $table) {
-            $table->id('id_acompanhante');
-            $table->foreignId('id_reserva')->constrained('reserva', 'id_reserva');
-            $table->string('nome');
-            $table->integer('idade');
-        });
+
     }
 };

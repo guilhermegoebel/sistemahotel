@@ -14,12 +14,12 @@ class Acompanhante extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'id_cliente',
+        'id_reserva',
         'nome',
         'idade',
     ];
 
-    public function cliente() {
-        return $this->belongsTo(Cliente::class, 'id_cliente', 'id_cliente');
+    public function reserva() {
+        return $this->belongsTo(Reserva::class, 'id_reserva', 'id_reserva');
     }
 }

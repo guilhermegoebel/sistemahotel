@@ -35,15 +35,25 @@ class ReservaController extends Controller
             'data_checkout' => 'required|date|after_or_equal:data_checkin',
             'quartos' => 'required|array',
             'quartos.*' => 'exists:quarto,id_quarto',
+            'acompanhantes' => 'nullable|json'
         ]);
 
         $reserva = Reserva::create([
             'id_cliente' => $validatedData['id_cliente'],
             'data_checkin' => $validatedData['data_checkin'],
             'data_checkout' => $validatedData['data_checkout'],
-            'valor' => 0, //Vai ser baguiado depois
+            'valor' => 0,
             'status' => 'pendente',
         ]);
+
+        if ($request->acompanhantes) {
+            $acompanhantes = json_decode($validatedData['acompanhantes'], true);
+
+            foreach ($acompanhantes as $acompanhanteData) {
+                $acompanhanteData['id_reserva'] = $reserva->id_reserva;
+                Acompanhante::create($acompanhanteData);
+            }
+        }
 
         $reserva->quartos()->attach($validatedData['quartos']);
 
@@ -118,7 +128,7 @@ class ReservaController extends Controller
     public function getById($id)
     {
         // Tenta encontrar a reserva com o ID
-        $reserva = Reserva::find($id);
+        $reserva = Reserva::with(['acompanhantes', 'quartos'])->find($id);
 
         // Verifica se a reserva foi encontrada
         if ($reserva) {

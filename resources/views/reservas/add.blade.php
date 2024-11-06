@@ -25,57 +25,35 @@
             <input type="date" name="data_checkout" class="form-control" required>
         </div>
 
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#acompanhantesModal">
-            Adicionar acompanhante
-        </button>
+        <h5>Acompanhantes</h5>
+        <table class="table" id="tabelaAcompanhantes">
+            <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Idade</th>
+                <th>Ação</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- Acompanhantes adicionados serão exibidos aqui -->
+            </tbody>
+        </table>
 
-        <div class="modal fade" id="acompanhantesModal" tabindex="-1" role="dialog">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <div class="modal-title">Acompanhantes</div>
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    </div>
-                    <div class="modal-body">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Nome</th>
-                                    <th>Idade</th>
-                                    <th>Selecionar</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($acompanhantes as $acompanhante)
-                                    <tr>
-                                        <td>{{ $acompanhante->nome }}</td>
-                                        <td>{{ $acompanhante->idade }}</td>
-                                        <td>
-                                            <input type="checkbox" name="acompanhantes[]" value="{{ $acompanhante->id_acompanhante }}">
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+        <button type="button" class="btn btn-primary" onclick="abrirModal()">Adicionar Acompanhante</button>
 
-                        <!--Formulario novo do acompanhante -->
-                        <div class="title">Adicionar Acompanhante</div>
-                        <div>
-                            <label for="nome">Nome: </label>
-                            <input type="text" name="nome" id="nome">
-                        </div>
-                        <div>
-                            <label for="idade">Idade:</label>
-                            <input type="number" name="idade" id="idade">
-                        </div>
-                        <button type="button" id="adicionarAcompanhante" class="btn btn-secondary">Adicionar</button>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                    </div>
-                </div>
+        <div id="modalAcompanhante" class="modal">
+            <div class="modal-content">
+                <h4>Adicionar Acompanhante</h4>
+                <label>Nome: </label>
+                <input type="text" id="acompanhanteNome">
+                <label>Idade: </label>
+                <input type="number" id="acompanhanteIdade">
+                <button type="button" onclick="adicionarAcompanhante()">Adicionar</button>
+                <button type="button" onclick="fecharModal()">Fechar</button>
             </div>
         </div>
+
+        <input type="hidden" name="acompanhantes" id="acompanhantesInput">
 
         <div class="form-group">
             <label for="quartos">Selecione os quartos:</label>
@@ -90,4 +68,55 @@
         <button type="submit" class="btn btn-primary">Salvar Reserva</button>
         <a href="{{ route('reservas.index') }}" class="btn btn-secondary">Cancelar</a>
     </form>
+
+    <script>
+        let acompanhantes = [];
+
+        function adicionarAcompanhante() {
+            const nome = document.getElementById('acompanhanteNome').value;
+            const idade = document.getElementById('acompanhanteIdade').value;
+
+            if (nome && idade) {
+                const acompanhante = { nome, idade };
+                acompanhantes.push(acompanhante);
+
+                document.getElementById('acompanhanteNome').value = '';
+                document.getElementById('acompanhanteIdade').value = '';
+
+                atualizarTabelaAcompanhantes();
+                fecharModal();
+
+                document.getElementById('acompanhantesInput').value = JSON.stringify(acompanhantes);
+            }
+        }
+
+        function removerAcompanhante(index) {
+            acompanhantes.splice(index, 1);
+            atualizarTabelaAcompanhantes();
+            document.getElementById('acompanhantesInput').value = JSON.stringify(acompanhantes);
+        }
+
+        function atualizarTabelaAcompanhantes() {
+            const tabela = document.getElementById('tabelaAcompanhantes').getElementsByTagName('tbody')[0];
+            tabela.innerHTML = '';
+
+            acompanhantes.forEach((acompanhante, index) => {
+                const row = tabela.insertRow();
+
+                row.innerHTML = `
+                    <td>${acompanhante.nome}</td>
+                    <td>${acompanhante.idade}</td>
+                    <td><button type="button" class="btn btn-danger" onclick="removerAcompanhante(${index})">Remover</button></td>
+                `;
+            });
+        }
+
+        function abrirModal() {
+            document.getElementById('modalAcompanhante').style.display = 'block';
+        }
+
+        function fecharModal() {
+            document.getElementById('modalAcompanhante').style.display = 'none';
+        }
+    </script>
 @endsection

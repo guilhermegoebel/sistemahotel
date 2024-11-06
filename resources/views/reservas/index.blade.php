@@ -82,9 +82,11 @@
                             </div>
                         </div>
                         <!-- adicionar checkin (com modal)  nas acoes da tabela-->
-                        <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#modalCheckin-{{ $reserva->id_reserva }}">
-                            Check-in
-                        </button>
+                        @if ($reserva->status == 'pendente')
+                            <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#modalCheckin-{{ $reserva->id_reserva }}">
+                                Check-in
+                            </button>
+                        @endif
                         <div class="modal fade" id="modalCheckin-{{ $reserva->id_reserva }}" tabindex="-1" aria-labelledby="modalLabelCheckin-{{ $reserva->id_reserva }}" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
@@ -106,9 +108,11 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#modalCheckout-{{ $reserva->id_reserva }}">
-                            Check-out
-                        </button>
+                        @if ($reserva->status == 'confirmada')
+                            <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#modalCheckout-{{ $reserva->id_reserva }}">
+                                Check-out
+                            </button>
+                        @endif
                         <div class="modal fade" id="modalCheckout-{{ $reserva->id_reserva }}" tabindex="-1" aria-labelledby="modalLabelCheckout-{{ $reserva->id_reserva }}" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">

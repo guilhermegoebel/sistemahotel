@@ -8,6 +8,13 @@
         <li><strong>Check-in:</strong> {{ \Carbon\Carbon::parse($reserva->data_checkin)->format('d/m/Y') }}</li>
         <li><strong>Check-out:</strong> {{ \Carbon\Carbon::parse($reserva->data_checkout)->format('d/m/Y') }}</li>
         <li><strong>Duração da hospedagem:</strong> {{ $diasHospedagem }} {{ $diasHospedagem > 1 ? 'dias' : 'dia' }}</li>
+        <li><strong>Acompanhantes:</strong>
+            <ul>
+                @foreach($reserva->acompanhantes as $acompanhante)
+                    <li>{{ $acompanhante->nome }} - {{ $acompanhante->idade }} anos</li>
+                @endforeach
+            </ul>
+        </li>
         <li><strong>Quartos reservados: </strong>
             <ul>
                 @foreach($reserva->quartos as $quarto)

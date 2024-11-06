@@ -14,10 +14,15 @@ class AcompanhanteController extends Controller
 
     public function store(Request $request) {
         $request->validate([
+            'id_reserva' =>'required|exists:reserva,id_reserva',
             'nome' => 'required|string|max:255',
             'idade' => 'required|integer|min:0',
         ]);
-        Acompanhante::create($request->all());
-        return redirect()->route('acompanhante.index')->with('success', 'Acompanhante adicionado com sucesso receba');
+        Acompanhante::create([
+            'id_reserva' => $request->id_reserva,
+            'nome' => $request->nome,
+            'idade' => $request->idade,
+        ]);
+        return back()->with('success', 'Acompanhante adicionado com sucesso!');
     }
 }

@@ -37,4 +37,8 @@ class Reserva extends Model
     {
         return $this->hasOne(Checkinout::class, 'id_reserva', 'id_reserva');
     }
+
+    public function acompanhantes() {
+        return $this->hasMany(Acompanhante::class, 'id_reserva', 'id_reserva');
+    }
 }
