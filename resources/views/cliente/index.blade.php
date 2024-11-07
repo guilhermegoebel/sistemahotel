@@ -1,6 +1,6 @@
 @extends('app')
-@section('title', 'Cliente Index')
-@section('h1', 'Cliente :D')
+@section('title', 'Lista de clientes')
+@section('h1', 'Clientes')
 
 @section('content')
     <a href="{{ route('cliente.add') }}" class="btn btn-primary mb-3">Adicionar novo cliente</a>

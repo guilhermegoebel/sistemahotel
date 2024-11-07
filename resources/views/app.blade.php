@@ -21,6 +21,7 @@
     <script src="https://cdn.datatables.net/buttons/2.1.0/js/buttons.print.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.1.0/js/buttons.html5.min.js"></script>
     <title>@yield('title')</title>
+    <link rel="icon" href="https://em-content.zobj.net/source/skype/289/hotel_1f3e8.png" type="image/png">
 </head>
 <body>
 
@@ -35,7 +36,7 @@
         </ul>
     </div>
 </nav>
-<div class="container">
+<div class="container" style="padding-top: 20px;">
     <h1>@yield('h1')</h1>
 
 

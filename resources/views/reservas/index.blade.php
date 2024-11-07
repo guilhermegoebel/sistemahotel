@@ -3,7 +3,7 @@
 @section('h1', 'Reservas')
 
 @section('content')
-    <a href="{{ route('reservas.add') }}" class="btn btn-primary mb-3">Adicionar Nova Reserva</a>
+    <a href="{{ route('reservas.add') }}" class="btn btn-primary mb-3">Adicionar nova reserva</a>
     <table class="table table-striped">
         <thead>
         <tr>
@@ -83,7 +83,7 @@
                         </div>
                         <!-- adicionar checkin (com modal)  nas acoes da tabela-->
                         @if ($reserva->status == 'pendente')
-                            <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#modalCheckin-{{ $reserva->id_reserva }}">
+                            <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalCheckin-{{ $reserva->id_reserva }}">
                                 Check-in
                             </button>
                         @endif
@@ -109,7 +109,7 @@
                             </div>
                         </div>
                         @if ($reserva->status == 'confirmada')
-                            <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#modalCheckout-{{ $reserva->id_reserva }}">
+                            <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalCheckout-{{ $reserva->id_reserva }}">
                                 Check-out
                             </button>
                         @endif

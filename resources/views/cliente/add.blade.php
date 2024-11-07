@@ -1,6 +1,6 @@
 @extends('app')
-@section('title', 'Cliente :: Formulário')
-@section('h1', 'Adicionar cliente')
+@section('title', 'Adicionar cliente')
+@section('h1', 'Adicionar novo cliente')
 
 @section('content')
     <div class="container">

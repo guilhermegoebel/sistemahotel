@@ -1,6 +1,6 @@
 @extends('app')
 @section('title', 'Adicionar Quartos')
-@section('h1', 'Adicionar Quarto')
+@section('h1', 'Adicionar novo quarto')
 @section('content')
     <div class="container">
 

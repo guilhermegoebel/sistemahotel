@@ -1,6 +1,6 @@
 @extends('app')
-@section('title', 'Criar Reserva')
-@section('h1', 'Adicionar Nova Reserva')
+@section('title', 'Adicionar reserva')
+@section('h1', 'Adicionar nova reserva')
 
 @section('content')
     <form action="{{ route('reservas.add') }}" method="POST" id="form">
@@ -8,20 +8,29 @@
 
         <!-- Cliente -->
         <div class="form-group">
-            <label for="id_cliente">Cliente</label>
-            <select name="id_cliente" class="form-control" required>
-                <option value="">Selecione um cliente</option>
-                @foreach($clientes as $cliente)
-                    <option
-                        value="{{ $cliente->id_cliente }}" {{ old('id_cliente') == $cliente->id_cliente ? 'selected' : '' }}>
-                        {{ $cliente->nome }}
-                    </option>
-                @endforeach
-            </select>
+            <label for="id_cliente" class="col-form-label">Cliente</label>
+            <div class="row align-items-center">
+                <div class="col-sm-10">
+                    <select name="id_cliente" class="form-control" required>
+                        <option value="">Selecione um cliente</option>
+                        @foreach($clientes as $cliente)
+                            <option value="{{ $cliente->id_cliente }}"
+                                {{ old('id_cliente') == $cliente->id_cliente ? 'selected' : '' }}>
+                                {{ $cliente->nome }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col-sm-2 d-flex">
+                    <a href="{{ route('cliente.add') }}" target="_blank" class="btn btn-outline-primary w-100">Adicionar novo cliente</a>
+                </div>
+            </div>
             @error('id_cliente')
-            <div class="text-danger">{{ $message }}</div>
+            <div class="col-sm-12 text-danger mt-2">{{ $message }}</div>
             @enderror
         </div>
+
+
 
         <!-- Data Check-in -->
         <div class="form-group">

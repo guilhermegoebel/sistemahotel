@@ -4,10 +4,11 @@
 
 <!--nova secao com os historicos de check-in e check-out-->
 @section('content')
+    <hr>
     <div class="row">
         <!-- Histórico de Check-ins -->
         <div class="col-md-6">
-            <h2>Histórico de Check-ins Realizados</h2>
+            <h2 style="padding-bottom: 10px;">Check-ins</h2>
             <table class="table table-striped table-bordered">
                 <thead class="toast-dark">
                 <tr>
@@ -34,7 +35,7 @@
 
         <!-- Histórico de Check-outs -->
         <div class="col-md-6">
-            <h2>Histórico de Check-outs Realizados</h2>
+            <h2 style="padding-bottom: 10px;">Check-outs</h2>
             <table class="table table-striped table-bordered">
                 <thead class="toast-dark">
                 <tr>
